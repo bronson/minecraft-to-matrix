@@ -1,0 +1,6 @@
+matrix:
+  # you can also specify a custom port: server: https://matrix.org:8448
+  server: https://matrix.org
+  room_id: '!ROOM-ID:matrix.org'
+  username: jdoe
+  password: onoe
