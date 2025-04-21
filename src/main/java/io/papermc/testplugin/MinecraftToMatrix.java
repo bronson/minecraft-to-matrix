@@ -10,6 +10,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class MinecraftToMatrix extends JavaPlugin implements Listener {
   @Override
   public void onEnable() {
+    // creates the config file if it doesn't already exist
+    saveDefaultConfig();
+
+    debug("Server is: " + getConfig().getString("matrix.server"));
+    debug("Room is: " + getConfig().getString("matrix.room"));
+    debug("User is: " + getConfig().getString("matrix.username"));
+    debug("Password is: " + getConfig().getString("matrix.password"));
+
+//    getConfig().set("gabage", "I<3TRASH");
+//    saveConfig();
+
     Bukkit.getPluginManager().registerEvents(this, this);
   }
 
@@ -21,10 +32,12 @@ public class MinecraftToMatrix extends JavaPlugin implements Listener {
 
   @SuppressWarnings("unused")
   public void debug(Component msg) {
-    getComponentLogger().debug(msg);
+    // TODO: change to `debug` before release
+    getComponentLogger().info(msg);
   }
 
   public void debug(String msg) {
-    getComponentLogger().debug(Component.text(msg));
+    // TODO: change to `debug` before release
+    getComponentLogger().info(Component.text(msg));
   }
 }
