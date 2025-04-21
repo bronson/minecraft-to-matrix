@@ -30,7 +30,7 @@ public class MinecraftToMatrix extends JavaPlugin implements Listener {
 
     // Send startup message to Matrix
     if (roomResource != null) {
-      serverEvent("Server started");
+      serverEvent("server started");
       getLogger().info("Matrix integration enabled");
     } else {
       getLogger().warning("Matrix couldn't start - check configuration");
@@ -42,7 +42,7 @@ public class MinecraftToMatrix extends JavaPlugin implements Listener {
     // Send shutdown message to Matrix
     if (roomResource != null) {
       try {
-        serverEvent("Server is shutting down");
+        serverEvent("server is shutting down");
         getLogger().info("Sent shutdown message to Matrix");
       } catch (Exception e) {
         getLogger().warning("Failed to send shutdown message to Matrix");
@@ -72,7 +72,7 @@ public class MinecraftToMatrix extends JavaPlugin implements Listener {
     if (event.deathMessage() != null) {
       deathMessage = PlainTextComponentSerializer.plainText().serialize(event.deathMessage());
     }
-    send("<i>" + escapeHtml(deathMessage) + "</i>");
+    send("<i>" + escapeHtml(deathMessage) + "</i>", "m.notice");
   }
 
   private void initMatrixClient() {
@@ -108,39 +108,18 @@ public class MinecraftToMatrix extends JavaPlugin implements Listener {
   }
 
   private void serverEvent(String message) {
-    send("<b><i>" + escapeHtml(message) + "</i></b>");
+    send("<b><i>" + escapeHtml(message) + "</i></b>", "m.notice");
   }
 
   private void playerEvent(PlayerEvent event, String message) {
-    send("<i>" + event.getPlayer().getName() + " " + escapeHtml(message) + "</i>");
+    send("<i>" + event.getPlayer().getName() + " " + escapeHtml(message) + "</i>", "m.notice");
   }
   
-  private String escapeHtml(String text) {
-    if (text == null) {
-      return "";
-    }
-
-    return text.replace("&", "&amp;")
-               .replace("<", "&lt;")
-               .replace(">", "&gt;")
-               .replace("\"", "&quot;")
-               .replace("'", "&#39;");
-  }
-  
-  private String htmlToText(String html) {
-    if (html == null) {
-      return "";
-    }
-
-    String text = html.replaceAll("<[^>]*>", "");
-    return text.replace("&amp;", "&")
-               .replace("&lt;", "<")
-               .replace("&gt;", ">")
-               .replace("&quot;", "\"")
-               .replace("&#39;", "'");
-  }
-
   private void send(String html) {
+    send(html, "m.text");
+  }
+
+  private void send(String html, String msgType) {
     if (roomResource == null) {
       debug("Room resource is null, can't send: " + html);
       return;
@@ -148,6 +127,7 @@ public class MinecraftToMatrix extends JavaPlugin implements Listener {
 
     try {
       roomResource.sendMessage(Message.builder()
+          .type(msgType)
           .body(htmlToText(html))
           .formattedBody(html)
           .build());
@@ -157,7 +137,32 @@ public class MinecraftToMatrix extends JavaPlugin implements Listener {
     }
   }
 
-  public void debug(String msg) {
+  private void debug(String msg) {
     getComponentLogger().debug(Component.text(msg));
+  }
+
+  private String escapeHtml(String text) {
+    if (text == null) {
+      return "";
+    }
+
+    return text.replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace("\"", "&quot;")
+            .replace("'", "&#39;");
+  }
+
+  private String htmlToText(String html) {
+    if (html == null) {
+      return "";
+    }
+
+    String text = html.replaceAll("<[^>]*>", "");
+    return text.replace("&amp;", "&")
+            .replace("&lt;", "<")
+            .replace("&gt;", ">")
+            .replace("&quot;", "\"")
+            .replace("&#39;", "'");
   }
 }
