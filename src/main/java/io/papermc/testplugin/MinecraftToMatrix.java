@@ -87,15 +87,9 @@ public class MinecraftToMatrix extends JavaPlugin implements Listener {
         return;
       }
 
-      // pull out just the hostname. TODO: this is not great...
-      // Maybe this would be a fix: https://github.com/Cosium/matrix-communication-client/issues/92
-      String hostname = server.replace("https://", "").replace("http://", "").split(":")[0];
-
       matrixResources = MatrixResources.factory()
               .builder()
-              .https()
-              .hostname(hostname)
-              .defaultPort()
+              .uri(server)
               .usernamePassword(username, password)
               .build();
 

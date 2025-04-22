@@ -1,18 +1,18 @@
 # Minecraft To Matrix
 
-A simple Minecraft plugin to publish player events to a Matrix room.
+A simple Minecraft plugin to publish player events and chat to a Matrix room.
 
 ## Install
 
-Copy the plugin's jar to your server's `plugins` directory.
 
-Restart the server.
+1. Copy the plugin's jar to your server's `plugins` directory.
 
-Now you'll see a plugins/MinecraftToMatrix/config.yml file.
+1. Restart the server.
 
-Fill in the file with your server name, room ID, username, and password.
+Now you'll see a `plugins/MinecraftToMatrix/config.yml` file.
 
-In Element, you find the room ID in the room's Settings -> Advanced ->
+Fill in the file with your info. 
+In Element, you can find the room ID in the room's Settings -> Advanced ->
 Internal Room ID.
 
 ```yml
@@ -23,17 +23,20 @@ matrix:
   password: 'onoes!'
 ```
 
-NOTE: right now the server URL only specifies the hostname. The plugin
-always uses the default port and protocol.
-Follow [the upstream issue](https://github.com/Cosium/matrix-communication-client/issues/92) for updates.
-
 ## Usage
 
-Now restart your server. Hope it worked!
+Now that the configuration is set, restart your server again.
+
+Enjoy all the messages!
 
 Send me patches.
 
+### Compatibility
+
+I'm using this plugin on a Paper 1.21.4 server.
+
 ## License
 
-My code is MIT licensed, use it however you want. The rest of the code
-in this project retains its original license.
+The code written by me is MIT licensed. Use it however you want.
+
+Any other code in this project retains its original license.

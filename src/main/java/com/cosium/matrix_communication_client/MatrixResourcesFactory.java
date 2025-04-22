@@ -2,6 +2,8 @@ package com.cosium.matrix_communication_client;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * @author Réda Housni Alaoui
@@ -22,6 +24,8 @@ public class MatrixResourcesFactory {
     default HostnameBuilder http() {
       return https(false);
     }
+
+    AuthenticationBuilder uri(String serverUri);
   }
 
   public interface HostnameBuilder {
@@ -58,6 +62,36 @@ public class MatrixResourcesFactory {
     private Integer port;
     private Duration connectTimeout = Duration.of(30, ChronoUnit.SECONDS);
     private AccessTokenFactoryFactory accessTokenFactoryFactory;
+
+    @Override
+    public AuthenticationBuilder uri(String serverUri) {
+      try {
+        URI uri = new URI(serverUri);
+        String protocol = uri.getScheme();
+
+        // Set the protocol
+        if ("https".equalsIgnoreCase(protocol)) {
+          this.https = true;
+        } else if ("http".equalsIgnoreCase(protocol)) {
+          this.https = false;
+        } else {
+          throw new IllegalArgumentException("URI must have http or https protocol: " + serverUri);
+        }
+
+        // Set the hostname
+        this.hostname = uri.getHost();
+        if (this.hostname == null || this.hostname.isEmpty()) {
+          throw new IllegalArgumentException("URI must have a host: " + serverUri);
+        }
+
+        // Set the port
+        this.port = uri.getPort() != -1 ? uri.getPort() : null;
+
+        return this;
+      } catch (URISyntaxException e) {
+        throw new IllegalArgumentException("Invalid URI: " + serverUri, e);
+      }
+    }
 
     @Override
     public MatrixResourcesBuilder https(boolean https) {
