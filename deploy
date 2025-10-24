@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./gradlew build && scp build/libs/minecraft-to-matrix-1.0-SNAPSHOT.jar core@faf:services/crafty/greef/plugins

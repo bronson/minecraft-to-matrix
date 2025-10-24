@@ -27,7 +27,7 @@ matrix:
 
 Now that the configuration is set, restart your server again.
 
-Enjoy all the messages!
+Enjoy the messages!
 
 Send me patches.
 

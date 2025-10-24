@@ -1,0 +1,70 @@
+Room Event: msgtype=m.notice type=m.room.message
+
+{
+  "content": {
+    "body": ".Appape1553 joined the game",
+    "format": "org.matrix.custom.html",
+    "formatted_body": ".Appape1553 joined the game",
+    "msgtype": "m.notice"
+  },
+  "origin_server_ts": 1744557512207,
+  "room_id": "!bYGwQeXsRGHzFLhWws:matrix.org",
+  "sender": "@minebot:matrix.org",
+  "type": "m.room.message",
+  "unsigned": {
+    "membership": "join",
+    "age": 705804034
+  },
+  "event_id": "$EFCHsyAzlK62BzAL28xfiEEoGU-zt8ZOCkMeYJKXfJ8",
+  "user_id": "@minebot:matrix.org",
+  "age": 705804034
+}
+
+
+
+
+Chat: msgtype=m.text, type=m.room.message
+
+  "content": {
+    "body": "<sabony> tunnel end -1799 105 600",
+    "format": "org.matrix.custom.html",
+    "formatted_body": "&lt;sabony&gt; tunnel end -1799 105 600",
+    "msgtype": "m.text"
+  },
+  "origin_server_ts": 1744556949182,
+  "room_id": "!bYGwQeXsRGHzFLhWws:matrix.org",
+  "sender": "@minebot:matrix.org",
+  "type": "m.room.message",
+  "unsigned": {
+    "membership": "join",
+    "age": 706367059
+  },
+  "event_id": "$Pv4L-809PbYlTngbRLYthA8tukoz3emfyZlXKTDQxJU",
+  "user_id": "@minebot:matrix.org",
+  "age": 706367059
+}
+
+
+
+
+Advancement:
+
+{
+  "content": {
+    "body": "benminey has made the advancement [Bee Our Guest]",
+    "format": "org.matrix.custom.html",
+    "formatted_body": "benminey has made the advancement <font color=\"#44ff44\">[Bee Our Guest]</font>",
+    "msgtype": "m.notice"
+  },
+  "origin_server_ts": 1744557114971,
+  "room_id": "!bYGwQeXsRGHzFLhWws:matrix.org",
+  "sender": "@minebot:matrix.org",
+  "type": "m.room.message",
+  "unsigned": {
+    "membership": "join",
+    "age": 706201270
+  },
+  "event_id": "$T6jCcOLzLE0eCf_53JDLXNWufykdfKNk4lsYuYfvF5M",
+  "user_id": "@minebot:matrix.org",
+  "age": 706201270
+}
